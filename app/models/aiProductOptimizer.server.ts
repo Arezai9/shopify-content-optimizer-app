@@ -55,7 +55,7 @@ type TrustedSpecSource = {
 };
 
 const OUTPUT_DIR = path.join(process.cwd(), "public", "optimized-images");
-const OPENAI_TEXT_MODEL = process.env.OPENAI_TEXT_MODEL || "gpt-5.5";
+const OPENAI_TEXT_MODEL = process.env.OPENAI_TEXT_MODEL || "gpt-5.1-mini";
 const OPENAI_IMAGE_MODEL = process.env.OPENAI_IMAGE_MODEL || "gpt-image-1";
 const OPENAI_IMAGE_SIZE = process.env.OPENAI_IMAGE_SIZE || "1024x1024";
 const MAX_IMAGE_BYTES = Number(process.env.MAX_IMAGE_BYTES || 25_000_000);
