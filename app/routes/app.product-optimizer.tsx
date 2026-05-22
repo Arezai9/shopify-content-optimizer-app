@@ -529,7 +529,7 @@ export default function ProductOptimizer() {
           product: selectedProduct,
           trustedSpecSourceUrls: parseTrustedSourceUrls(trustedSpecSources),
           optimizeImages: true,
-          maxImages: 6,
+          maxImages: 1,
           applyAiImageEdit: true,
           uploadImagesToShopify: true,
         }),
@@ -634,6 +634,9 @@ export default function ProductOptimizer() {
                 placeholder="Optional: one trusted URL per line"
                 onInput={(event: any) => setTrustedSpecSources(event.currentTarget.value)}
               />
+              <s-text color="subdued">
+                Image optimization is limited to 1 image per run while testing.
+              </s-text>
               <s-button
                 variant="primary"
                 loading={optimizing}
