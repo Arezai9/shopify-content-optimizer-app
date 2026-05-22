@@ -32,6 +32,16 @@ const UPDATE_PRODUCT_WITH_MEDIA_MUTATION = `#graphql
   }
 `;
 
+function getMaxImagesPerOptimize(requestedValue: unknown) {
+  const configuredLimit = Math.max(
+    1,
+    Number(process.env.MAX_IMAGES_PER_OPTIMIZE || 1),
+  );
+  const requestedLimit = Math.max(1, Number(requestedValue || configuredLimit));
+
+  return Math.min(requestedLimit, configuredLimit, 10);
+}
+
 async function uploadImagesToShopify(
   admin: Awaited<ReturnType<typeof authenticate.admin>>["admin"],
   product: ProductForOptimization,
@@ -92,7 +102,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     const imageResults = [];
     const optimizeImages = body.optimizeImages !== false;
     const applyAiImageEdit = body.applyAiImageEdit !== false;
-    const maxImages = Math.min(Number(body.maxImages || 6), 10);
+    const maxImages = getMaxImagesPerOptimize(body.maxImages);
 
     if (optimizeImages && Array.isArray(product.images)) {
       for (const image of product.images.slice(0, maxImages)) {
